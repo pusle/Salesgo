@@ -1,0 +1,73 @@
+<div class="panel panel-default">
+    <div class="panel-heading">
+        <h4 class="panel-title">Actions</h4>
+    </div>
+    <div class="panel-body">
+        {% if contact.actions is empty %}
+            <div class="col-sm-12">No actions taken yet. What are you waiting for?</div>
+        {% endif %}
+
+        {% for action in contact.actions %}
+            <div class="row action {{ (action.done) ? 'action-done' : '' }}">
+                <div class="col-sm-4 col-lg-2"><h4>{{ action.actionType.name }}</h4></div>
+                <div class="col-sm-8 col-lg-10">
+                    <h4><span class="glyphicon glyphicon-calendar"></span> {{ action.startedAt | date('d.m.Y H:i') }}</h4>
+                    {{ action.notes | raw }}
+                    {% if not action.done %}
+                        <button type="button" class="btn btn-success" data-toggle="modal" data-target="#editActionModal{{ loop.index }}">
+                            Edit action
+                        </button>
+                    {% endif %}
+                </div>
+            </div>
+
+            {% if not action.done %}
+                {{ include('contact/partials/actions_edit_form.html.twig') }}
+            {% endif %}
+
+            <hr>
+        {% endfor %}
+    </div>
+    <div class="panel-footer">
+        <button type="button" class="btn btn-success" data-toggle="modal" data-target="#actionModal">
+            New action
+        </button>
+    </div>
+</div>
+
+<div class="modal fade" id="actionModal" tabindex="-1" role="dialog" aria-labelledby="myActionModalLabel">
+    {{ form_start(action_form) }}
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title" id="myModalLabel">Add new action</h4>
+            </div>
+            <div class="modal-body">
+                <div class="form-group">
+                    {{ form_label(action_form.actionType, null, { 'label_attr': { 'class': 'control-label' }}) }}
+                    {{ form_widget(action_form.actionType, {'attr': {'class': 'form-control'}}) }}
+                </div>
+                <div class="form-group">
+                    {{ form_label(action_form.notes, null, { 'label_attr': { 'class': 'control-label' }}) }}
+                    {{ form_widget(action_form.notes, {'attr': {'class': 'form-control'}}) }}
+                </div>
+                <div class="form-group">
+                    {{ form_label(action_form.startedAt, null, { 'label_attr': { 'class': 'control-label' }}) }}
+                    <div class="input-group date" id="actionStartDatePicker">
+                        {{ form_widget(action_form.startedAt, { 'attr': { 'class': 'form-control' }}) }}
+                        <span class="input-group-addon">
+                            <span class="glyphicon glyphicon-calendar"></span>
+                        </span>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                <input type="submit" name="submit" class="btn btn-primary" value="Add">
+            </div>
+        </div>
+    </div>
+    {{ form_widget(action_form._token) }}
+    {{ form_end(action_form, {'render_rest': false}) }}
+</div>

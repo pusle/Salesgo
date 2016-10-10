@@ -1,0 +1,22 @@
+<div class="panel panel-default">
+    <table class="table table-bordered">
+        <thead>
+        <tr>
+            <th>Number</th>
+            <th>Type</th>
+            <th>County</th>
+            <th>Central</th>
+        </tr>
+        </thead>
+        <tbody>
+        {% for permit in organization.permits %}
+            <tr>
+                <td>{{ permit.permitNumber }}</td>
+                <td>{{ permit.permitType.type }}</td>
+                <td>{{ permit.permitCounty.county }}</td>
+                <td>{{ permit.centralName }}</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+</div>

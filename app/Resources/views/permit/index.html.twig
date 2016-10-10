@@ -1,0 +1,43 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <h1>PermitDetail list</h1>
+
+    <table>
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>County</th>
+                <th>Permittype</th>
+                <th>Permitnumber</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for permitDetail in permitDetails %}
+            <tr>
+                <td><a href="{{ path('permitdetail_show', { 'id': permitDetail.id }) }}">{{ permitDetail.id }}</a></td>
+                <td>{{ permitDetail.county }}</td>
+                <td>{{ permitDetail.permitType }}</td>
+                <td>{{ permitDetail.permitNumber }}</td>
+                <td>
+                    <ul>
+                        <li>
+                            <a href="{{ path('permitdetail_show', { 'id': permitDetail.id }) }}">show</a>
+                        </li>
+                        <li>
+                            <a href="{{ path('permitdetail_edit', { 'id': permitDetail.id }) }}">edit</a>
+                        </li>
+                    </ul>
+                </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <ul>
+        <li>
+            <a href="{{ path('permitdetail_new') }}">Create a new entry</a>
+        </li>
+    </ul>
+{% endblock %}

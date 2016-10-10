@@ -1,0 +1,68 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}{{ organization.name }}{% endblock %}
+
+{% block body %}
+
+    <section>
+        <ol class="breadcrumb">
+            <li><a href="#">Home</a></li>
+            <li><a href="{{ path('organization_index') }}">Organizations</a></li>
+            <li class="active">{{ organization.name }}</li>
+        </ol>
+    </section>
+
+    <section>
+        {% for flash_message in app.session.flashBag.get('success') %}
+            <div class="alert alert-success" role="alert">
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+                {{ flash_message }}
+            </div>
+        {% endfor %}
+        {% for flash_message in app.session.flashBag.get('error') %}
+            <div class="alert alert-warning" role="alert">
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+                {{ flash_message }}
+            </div>
+        {% endfor %}
+    </section>
+
+    <section>
+        {{ include('organization/partials/organization.html.twig') }}
+    </section>
+
+    <section>
+        <!-- Nav tabs -->
+        <ul class="nav nav-tabs" role="tablist">
+            <li role="presentation" class="active"><a href="#contacts" aria-controls="contacts" role="tab" data-toggle="tab">Contacts <span class="badge">{{ organization.contacts | length }}</span></a></li>
+            <li role="presentation"><a href="#addresses" aria-controls="addresses" role="tab" data-toggle="tab">Addresses <span class="badge">{{ organization.addresses | length }}</span></a></li>
+            <li role="presentation"><a href="#industries" aria-controls="industries" role="tab" data-toggle="tab">Industries <span class="badge">{{ organization.industryCodes | length }}</span></a></li>
+            <li role="presentation"><a href="#permits" aria-controls="permits" role="tab" data-toggle="tab">Permits <span class="badge">{{ organization.permits | length }}</span></a></li>
+        </ul>
+
+        <!-- Tab panes -->
+        <div class="tab-content">
+            <div role="tabpanel" class="tab-pane active" id="contacts">
+                {{ include('organization/partials/contacts.html.twig') }}
+            </div>
+            <div role="tabpanel" class="tab-pane" id="addresses">
+                {{ include('organization/partials/addresses.html.twig') }}
+            </div>
+            <div role="tabpanel" class="tab-pane" id="industries">
+                {{ include('organization/partials/industries.html.twig') }}
+            </div>
+            <div role="tabpanel" class="tab-pane" id="permits">
+                {{ include('organization/partials/permits.html.twig') }}
+            </div>
+        </div>
+    </section>
+
+{% endblock %}
+
+{% block javascripts %}
+    <script type="text/javascript" src="/assets/js/contactMethods.js"></script>
+{% endblock %}

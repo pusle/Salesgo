@@ -1,0 +1,39 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <h1>LeadStatus list</h1>
+
+    <table>
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Changedat</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for leadStatus in leadStatuses %}
+            <tr>
+                <td><a href="{{ path('leadstatus_show', { 'id': leadStatus.id }) }}">{{ leadStatus.id }}</a></td>
+                <td>{% if leadStatus.changedAt %}{{ leadStatus.changedAt|date('Y-m-d H:i:s') }}{% endif %}</td>
+                <td>
+                    <ul>
+                        <li>
+                            <a href="{{ path('leadstatus_show', { 'id': leadStatus.id }) }}">show</a>
+                        </li>
+                        <li>
+                            <a href="{{ path('leadstatus_edit', { 'id': leadStatus.id }) }}">edit</a>
+                        </li>
+                    </ul>
+                </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <ul>
+        <li>
+            <a href="{{ path('leadstatus_new') }}">Create a new entry</a>
+        </li>
+    </ul>
+{% endblock %}

@@ -1,0 +1,62 @@
+<div class="panel panel-default">
+    <div class="panel-heading">
+        <span>Contact</span>
+    </div>
+    <table class="table table-bordered">
+        {% if organization.contacts is empty %}
+            <tr>
+                <td colspan="5">No contacts yet. Find one?</td>
+            </tr>
+        {% else %}
+            <thead>
+            <tr>
+                <th>Name</th>
+                <th>Methods</th>
+            </tr>
+            </thead>
+            <tbody class="actions-selector">
+            {% for contact in organization.contacts %}
+                <tr>
+                    <td><a href="{{ path('contact_show', {'id': contact.id}) }}">{{ contact.name }}</a></td>
+                    <td>
+                        <ul>
+                            {% for method in contact.contactMethods %}
+                                <li>{{ method.name }}: {{ method.value }}</li>
+                            {% endfor %}
+                        </ul>
+                    </td>
+                </tr>
+            {% endfor %}
+            </tbody>
+        {% endif %}
+    </table>
+    <div class="panel-footer">
+        <button type="button" class="btn btn-success" data-toggle="modal" data-target="#contactModal">
+            New contact
+        </button>
+    </div>
+</div>
+
+<div class="modal fade" id="contactModal" tabindex="-1" role="dialog" aria-labelledby="myContactModalLabel">
+    {{ form_start(contact_form) }}
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title" id="myModalLabel">Add new contact</h4>
+            </div>
+            <div class="modal-body" id="contactMehtods" data-prototype="{% filter escape %}{{ include(':organization/partials:prototype_contact_method.html.twig', { 'contact_method': contact_form.contactMethods.vars.prototype }) }}{% endfilter %}">
+                <div class="form-group">
+                    {{ form_label(contact_form.name, null, { 'label_attr': { 'class': 'control-label' }}) }}
+                    {{ form_widget(contact_form.name, {'attr': {'class': 'form-control'}}) }}
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                <input type="submit" name="submit" class="btn btn-primary" value="Add">
+            </div>
+        </div>
+    </div>
+    {{ form_widget(contact_form._token) }}
+    {{ form_end(contact_form, {'render_rest': false}) }}
+</div>

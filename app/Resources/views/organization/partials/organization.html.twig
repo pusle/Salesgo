@@ -1,0 +1,70 @@
+<div class="panel panel-info">
+    <div class="panel-heading">
+        <h1 class="">{{ organization.name }}</h1>
+    </div>
+    <div class="panel-body">
+        <div class="row">
+            <div class="col-md-3 col-lg-3 " align="center">
+                <img alt="Company logo" src="/assets/img/company.png" class="img-circle img-responsive">
+            </div>
+            <div class=" col-md-9 col-lg-9 ">
+                <table class="table table-company-information">
+                    <tbody>
+                    <tr>
+                        <th>Organization number:</th>
+                        <td>{{ organization.number }}</td>
+                    </tr>
+                    <tr>
+                        <th>Organization name:</th>
+                        <td>{{ organization.name }}</td>
+                    </tr>
+                    <tr>
+                        <th>Registration date:</th>
+                        <td>{% if organization.registrationDate %}{{ organization.registrationDate|date('Y-m-d') }}{% else %}N/A{% endif %}</td>
+                    </tr>
+
+                    <tr>
+                    <tr>
+                        <th>Organization type:</th>
+                        <td>{% if organization.type %}{{ organization.type }}{% else %}N/A{% endif %}</td>
+                    </tr>
+                    <tr>
+                        <th>Number of employees:</th>
+                        <td>{% if organization.numEmployees %}{{ organization.numEmployees }}{% else %}N/A{% endif %}</td>
+                    </tr>
+                    <tr>
+                        <th>Is Bankrupt:</th>
+                        <td>{% if organization.bankrupt %}Yes{% else %}No{% endif %}</td>
+                    </tr>
+                    <tr>
+                        <th>Liquidation problems:</th>
+                        <td>{% if organization.liquidation %}Yes{% else %}No{% endif %}</td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+    <div class="panel-footer clearfix">
+        <div class="pull-right">
+            <div class="dropdown">
+                <button class="btn btn-md btn-info" id="dLabel" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    Organization actions
+                    <span class="caret"></span>
+                </button>
+                <ul class="dropdown-menu" aria-labelledby="dLabel">
+                    <li>
+                        <a href="{{ path('organization_edit', {'id': organization.id }) }}" type="button" class="btn btn-normal">
+                            Edit
+                        </a>
+                    </li>
+                    <li>
+                        <a href="{{ path('import_brreg', {'orgNumber': organization.number }) }}" type="button" class="btn btn-normal">
+                            Import from BRREG
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>

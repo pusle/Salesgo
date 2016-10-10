@@ -1,0 +1,12 @@
+<div class="form-group">
+    {{ form_label(contact_method.name, null, { 'label_attr': { 'class': 'col-sm-3 control-label' }}) }}
+    <div class="col-sm-9">
+        {{ form_widget(contact_method.name, {'attr': {'class': 'form-control'}}) }}
+    </div>
+</div>
+<div class="form-group">
+    {{ form_label(contact_method.value, null, { 'label_attr': { 'class': 'col-sm-3 control-label' }}) }}
+    <div class="col-sm-9">
+        {{ form_widget(contact_method.value, {'attr': {'class': 'form-control'}}) }}
+    </div>
+</div>

@@ -1,0 +1,38 @@
+{% set form = getcontactactioncompleteform(action.id) %}
+
+<div class="modal fade" id="editActionModal{{ loop.index }}" tabindex="-1" role="dialog" aria-labelledby="myActionModalLabel">
+    {{ form_start(form) }}
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title" id="myModalLabel">Edit action</h4>
+            </div>
+            <div class="modal-body">
+                <div class="form-group">
+                    {{ form_label(form.actionType, null, { 'label_attr': { 'class': 'control-label' }}) }}
+                    {{ form_widget(form.actionType, {'attr': {'class': 'form-control'}}) }}
+                </div>
+                <div class="form-group">
+                    {{ form_label(form.notes, null, { 'label_attr': { 'class': 'control-label' }}) }}
+                    {{ form_widget(form.notes, {'attr': {'class': 'form-control'}}) }}
+                </div>
+                <div class="form-group">
+                    {{ form_label(form.startedAt, null, { 'label_attr': { 'class': 'control-label' }}) }}
+                    <div class="input-group date" id="actionStartDatePicker">
+                        {{ form_widget(form.startedAt, { 'attr': { 'class': 'form-control' }}) }}
+                        <span class="input-group-addon">
+                            <span class="glyphicon glyphicon-calendar"></span>
+                        </span>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                <input type="submit" name="submit" class="btn btn-primary" value="Save">
+            </div>
+        </div>
+    </div>
+    {{ form_widget(form._token) }}
+    {{ form_end(form, {'render_rest': false}) }}
+</div>

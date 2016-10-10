@@ -1,0 +1,46 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <h1>IndustryCode</h1>
+
+    <table>
+        <tbody>
+            <tr>
+                <th>Id</th>
+                <td>{{ industryCode.id }}</td>
+            </tr>
+            <tr>
+                <th>Code</th>
+                <td>{{ industryCode.code }}</td>
+            </tr>
+            <tr>
+                <th>Description</th>
+                <td>{{ industryCode.description }}</td>
+            </tr>
+            <tr>
+                <th>Organizations</th>
+                <td>
+                    <ul>
+                    {% for org in industryCode.organization %}
+                        <li>{{ org.name }}</li>
+                    {% endfor %}
+                    </ul>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+
+    <ul>
+        <li>
+            <a href="{{ path('industrycode_index') }}">Back to the list</a>
+        </li>
+        <li>
+            <a href="{{ path('industrycode_edit', { 'id': industryCode.id }) }}">Edit</a>
+        </li>
+        <li>
+            {{ form_start(delete_form) }}
+                <input type="submit" value="Delete">
+            {{ form_end(delete_form) }}
+        </li>
+    </ul>
+{% endblock %}

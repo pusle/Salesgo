@@ -1,0 +1,188 @@
+body,
+input,
+select,
+textarea,
+body * {
+    font-family: 'Roboto', sans-serif;
+    box-sizing: border-box;
+}
+body::after, body::before,
+input::after,
+input::before,
+select::after,
+select::before,
+textarea::after,
+textarea::before,
+body *::after,
+body *::before {
+    box-sizing: border-box;
+}
+
+body {
+    padding: 70px 0 0 0;
+    background-image: -webkit-linear-gradient(top, #f2f2f2, #e6e6e6) !important;
+    background-image: linear-gradient(top, #f2f2f2, #e6e6e6) !important;
+    background-color: #eee !important;
+}
+
+
+/**
+ * Classes
+ */
+.table tbody > tr > td.vertical-align {
+    vertical-align: middle;
+}
+
+
+
+/**
+ * Components
+ */
+.navbar.navbar-default {
+    background-color: #3d98c5;
+}
+
+.navbar.navbar-default .navbar-brand {
+    color: #fff;
+    font-size: 25px;
+}
+
+.navbar.navbar-default .navbar-nav > li > a {
+    color: #fff;
+}
+
+.navbar.navbar-default .navbar-nav > li.active > a {
+    background-color: #337fa4;
+}
+
+.navbar.navbar-default .navbar-nav > .open > a,
+.navbar.navbar-default .navbar-nav > .open > a:hover,
+.navbar.navbar-default .navbar-nav > .open > a:focus {
+    background-color: #337fa4;
+    color: #555;
+}
+
+.navbar.navbar-default .navbar-toggle {
+    border-color: transparent;
+}
+
+.navbar.navbar-default .navbar-toggle .icon-bar {
+    background-color: #fff;
+}
+
+.navbar.navbar-default .navbar-toggle:hover,
+.navbar.navbar-default .navbar-toggle:focus {
+    background-color: #337fa4;
+}
+
+.tab-content {
+    padding: 15px;
+    background-color: #fff
+}
+
+.box {
+    margin-bottom: 10px;
+    padding: 10px;
+    background-color: #fff;
+}
+
+.box-info {
+    background-color: #d9edf7;
+    color: #31708f;
+}
+
+.box-success {
+    background-color: #dff0d8;
+    color: #3c763d;
+}
+
+.box-warning {
+    background-color: #fcf8e3;
+    color: #8a6d3b;
+}
+
+.box-danger {
+    background-color: #f2dede;
+    color: #a94442;
+}
+
+.box-standout {
+    background-color: #b9bcbe;
+    color: #333;
+}
+
+
+
+/**
+ * Dashboard
+ */
+.list-group-item.todo .checkbox {
+    margin-top: 0;
+    margin-bottom: 0;
+}
+
+
+
+/**
+ * Contacts
+ */
+.basic-info {
+    text-align: center;
+}
+
+.basic-info img.img-responsive {
+    margin: 0 auto;
+}
+
+.action.action-done {
+    color: #999;
+}
+
+.action.action-done .btn {
+    background-color: #ccc;
+    border-color: #ddd;
+    color: #eee;
+}
+
+/**
+ * Contact (Show)
+ */
+.contact-methods {
+
+}
+
+.contact-methods .value {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+
+
+/**
+ * Organizations
+ */
+.table th.orgnumber, .table td.orgnumber {
+    width: 120px;
+    max-width: 120px;
+}
+
+.table th.numpermits, .table td.numpermits {
+    width: 80px;
+    max-width: 80px;
+    text-align: center;
+}
+
+.table th.numemployees, .table td.numemployees {
+    width: 120px;
+    max-width: 120px;
+    text-align: center;
+}
+
+.table th.numcontacts, .table td.numcontacts {
+    width: 80px;
+    max-width: 80px;
+    text-align: center;
+}
+
+

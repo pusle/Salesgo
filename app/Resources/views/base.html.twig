@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8" />
+        <title>{% block title %}Welcome!{% endblock %}</title>
+        <link rel="stylesheet" href="/assets/css/styles.css" type="text/css" media="all">
+        <link rel="stylesheet" href="/assets/css/bootstrap.min.css" type="text/css" media="all">
+        <link rel="stylesheet" href="/assets/css/bootstrap-flat.min.css" type="text/css" media="all">
+        <link rel="stylesheet" href="/assets/css/bootstrap-datetimepicker.min.css" type="text/css" media="all">
+        <link rel="stylesheet" href="/assets/css/awesome-bootstrap-checkbox.css" type="text/css" media="all">
+        {% block stylesheets %}{% endblock %}
+        <link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}" />
+    </head>
+    <body>
+
+        {{ include('partials/navbar.html.twig') }}
+
+        <main class="container-fluid">
+            {% block body %}{% endblock %}
+        </main>
+
+        <script type="text/javascript" src="/assets/js/momentjs/moment.min.js"></script>
+        <script type="text/javascript" src="/assets/js/momentjs/locale/nb.js"></script>
+        <script type="text/javascript" src="/assets/js/jquery.js"></script>
+        <script type="text/javascript" src="/assets/js/bootstrap.min.js"></script>
+        <script type="text/javascript" src="/assets/js/bootstrap-datetimepicker.min.js"></script>
+        {% block javascripts %}{% endblock %}
+    </body>
+</html>

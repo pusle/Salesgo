@@ -1,0 +1,51 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Edit {{ organization.name }}{% endblock %}
+
+{% block body %}
+
+    <section>
+        <ol class="breadcrumb">
+            <li><a href="#">Home</a></li>
+            <li><a href="{{ path('organization_index') }}">Organizations</a></li>
+            <li><a href="{{ path('organization_show', {'id': organization.id }) }}">{{ organization.name }}</a></li>
+            <li class="active">Edit</li>
+        </ol>
+    </section>
+
+    <section>
+        {% for flash_message in app.session.flashBag.get('success') %}
+            <div class="alert alert-success" role="alert">
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+                {{ flash_message }}
+            </div>
+        {% endfor %}
+        {% for flash_message in app.session.flashBag.get('error') %}
+            <div class="alert alert-warning" role="alert">
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+                {{ flash_message }}
+            </div>
+        {% endfor %}
+        {% if form_errors is defined %}
+            <div class="alert alert-danger" role="alert">
+                {{ form_errors(edit_form) }}
+            </div>
+        {% endif %}
+    </section>
+
+    <section>
+        {{ form_start(edit_form) }}
+        {{ include('organization/partials/edit_organization.html.twig') }}
+        {{ form_widget(edit_form._token) }}
+        {{ form_end(edit_form, {'render_rest': false }) }}
+    </section>
+
+{% endblock %}
+
+{% block javascripts %}
+
+{% endblock %}

@@ -1,0 +1,15 @@
+services:
+#    todo.example:
+#        class: TodoBundle\Example
+#        arguments: ["@service_id", "plain_value", %parameter%]
+
+    todo.twig_extension:
+        class: TodoBundle\Twig\TodoExtension
+        arguments: ['@service_container']
+        tags:
+            - { name: twig.extension }
+
+    todo.todos:
+        class: TodoBundle\Service\DashboardTodoService
+        arguments: [ '@doctrine.orm.entity_manager', '@form.factory', '@router' ]
+        scope: request

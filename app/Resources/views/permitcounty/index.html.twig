@@ -1,0 +1,41 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <h1>PermitCounty list</h1>
+
+    <table>
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Number</th>
+                <th>County</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for permitCounty in permitCounties %}
+            <tr>
+                <td><a href="{{ path('permitcounty_show', { 'id': permitCounty.id }) }}">{{ permitCounty.id }}</a></td>
+                <td>{{ permitCounty.number }}</td>
+                <td>{{ permitCounty.county }}</td>
+                <td>
+                    <ul>
+                        <li>
+                            <a href="{{ path('permitcounty_show', { 'id': permitCounty.id }) }}">show</a>
+                        </li>
+                        <li>
+                            <a href="{{ path('permitcounty_edit', { 'id': permitCounty.id }) }}">edit</a>
+                        </li>
+                    </ul>
+                </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <ul>
+        <li>
+            <a href="{{ path('permitcounty_new') }}">Create a new entry</a>
+        </li>
+    </ul>
+{% endblock %}

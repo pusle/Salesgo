@@ -1,0 +1,41 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <h1>LeadStatusType list</h1>
+
+    <table>
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Title</th>
+                <th>Description</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for leadStatusType in leadStatusTypes %}
+            <tr>
+                <td><a href="{{ path('leadstatustype_show', { 'id': leadStatusType.id }) }}">{{ leadStatusType.id }}</a></td>
+                <td>{{ leadStatusType.title }}</td>
+                <td>{{ leadStatusType.description }}</td>
+                <td>
+                    <ul>
+                        <li>
+                            <a href="{{ path('leadstatustype_show', { 'id': leadStatusType.id }) }}">show</a>
+                        </li>
+                        <li>
+                            <a href="{{ path('leadstatustype_edit', { 'id': leadStatusType.id }) }}">edit</a>
+                        </li>
+                    </ul>
+                </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <ul>
+        <li>
+            <a href="{{ path('leadstatustype_new') }}">Create a new entry</a>
+        </li>
+    </ul>
+{% endblock %}

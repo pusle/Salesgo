@@ -1,0 +1,36 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <h1>PermitCounty</h1>
+
+    <table>
+        <tbody>
+            <tr>
+                <th>Id</th>
+                <td>{{ permitCounty.id }}</td>
+            </tr>
+            <tr>
+                <th>Number</th>
+                <td>{{ permitCounty.number }}</td>
+            </tr>
+            <tr>
+                <th>County</th>
+                <td>{{ permitCounty.county }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <ul>
+        <li>
+            <a href="{{ path('permitcounty_index') }}">Back to the list</a>
+        </li>
+        <li>
+            <a href="{{ path('permitcounty_edit', { 'id': permitCounty.id }) }}">Edit</a>
+        </li>
+        <li>
+            {{ form_start(delete_form) }}
+                <input type="submit" value="Delete">
+            {{ form_end(delete_form) }}
+        </li>
+    </ul>
+{% endblock %}

@@ -1,0 +1,16 @@
+services:
+    action.twig_extension:
+        class: ActionBundle\Twig\ActionExtension
+        arguments: ['@service_container']
+        tags:
+            - { name: twig.extension }
+
+    action.dashboard_actions:
+        class: ActionBundle\Service\DashboardActionService
+        arguments: [ '@doctrine.orm.entity_manager' ]
+        scope: request
+
+    action.contact_complete_action:
+        class: ActionBundle\Service\ContactCompleteActionService
+        arguments: [ '@doctrine.orm.entity_manager', '@form.factory', '@router' ]
+        scope: request

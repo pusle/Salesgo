@@ -1,0 +1,10 @@
+{% for address in organization.addresses %}
+    <li>
+        <h4>{{ address.type }}</h4>
+        <p>
+            {{ address.address }} <br>
+            {{ address.zip }} {{ address.city }} <br>
+            {{ address.countryCode }}
+        </p>
+    </li>
+{% endfor %}

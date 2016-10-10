@@ -1,0 +1,133 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}{{ contact.name }}{% endblock %}
+
+{% block body %}
+
+    <section>
+        <ol class="breadcrumb">
+            <li><a href="{{ path('dashboard') }}">Dashboard</a></li>
+            <li><a href="{{ path('contact_index') }}">Contacts</a></li>
+            <li class="active">{{ contact.name }}</li>
+        </ol>
+    </section>
+
+    <section>
+        {% for flash_message in app.session.flashBag.get('success') %}
+            <div class="alert alert-success" role="alert">
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+                {{ flash_message }}
+            </div>
+        {% endfor %}
+        {% for flash_message in app.session.flashBag.get('error') %}
+            <div class="alert alert-warning" role="alert">
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+                {{ flash_message }}
+            </div>
+        {% endfor %}
+    </section>
+
+    <div class="row">
+        <div class="col-lg-3 col-md-3">
+
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <h4 class="panel-title">{{ contact.name }}</h4>
+                </div>
+                <div class="panel-body">
+                    <div class="basic-info">
+                        <img alt="Contact image" src="/assets/img/contact.png" class="img-responsive img-rounded">
+                    </div>
+                </div>
+                <div class="panel-footer">
+                    <a href="{{ path('contact_edit', {'id': contact.id}) }}" class="btn btn-success btn-block">
+                        Edit
+                    </a>
+                </div>
+            </div>
+
+            {% if contact.leadStatuses is defined and contact.leadStatuses is not empty %}
+                {% set status = contact.leadStatuses|last %}
+                {% if status.leadStatusType.title == 'Dead' %}
+                    {% set statusClass = 'danger' %}
+                {% elseif status.leadStatusType.title == 'Not contacted' %}
+                    {% set statusClass = 'success' %}
+                {% elseif status.leadStatusType.title == 'Contacted' %}
+                    {% set statusClass = 'primary' %}
+                {% else %}
+                    {% set statusClass = 'info' %}
+                {% endif %}
+            {% endif %}
+            <section class="box box-{{ statusClass }} text-center" role="alert">
+                <div class="lead-status">
+                    <h4>{{ status.leadStatusType.title }}</h4>
+                </div>
+            </section>
+
+            <section class="box">
+                <div class="lead-status">
+                    {{ form_start(lead_status_form, {'attr': {'class': 'form-inline'}}) }}
+                    <div class="form-group">
+                        {{ form_widget(lead_status_form.leadStatusType, {'attr': {'class': 'form-control'}}) }}
+                    </div>
+                    <input type="submit" name="submit" value="Update" class="btn btn-success">
+                    {{ form_widget(lead_status_form._token) }}
+                    {{ form_end(lead_status_form) }}
+                </div>
+            </section>
+
+            {{ include('contact/partials/contactMethods.html.twig') }}
+        </div>
+
+        <div class="col-lg-6 col-md-6">
+            {{ include('contact/partials/notes.html.twig') }}
+
+            {{ include('contact/partials/actions.html.twig') }}
+        </div>
+
+        <div class="col-lg-3 col-md-3">
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <h4 class="panel-title">Organization</h4>
+                </div>
+                <div class="panel-body">
+                    <p><a href="{{ path('organization_show', {'id': contact.organization.id}) }}">{{ contact.organization.name }}</a> ({{ contact.organization.number }})</p>
+                    <table class="table table-bordered">
+                        <tr>
+                            <th>Permits</th>
+                            <td>{{ contact.organization.permits | length }}</td>
+                        </tr>
+                        <tr>
+                            <th>Employees</th>
+                            <td>{{ contact.organization.numEmployees }}</td>
+                        </tr>
+                    </table>
+                    {% for address in contact.organization.addresses %}
+                        <ul class="list-unstyled">
+                            <li>{{ address.address }}</li>
+                            <li>{{ address.zip }} {{ address.city }}</li>
+                            <li>{{ address.country }}</li>
+                        </ul>
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+    </div>
+
+{% endblock %}
+
+{% block javascripts %}
+    <script type="text/javascript" src="/assets/js/contactMethods.js"></script>
+    <script>
+        $(function () {
+            $('#actionStartDatePicker').datetimepicker({
+                locale: 'nb',
+                sideBySide: true
+            });
+        });
+    </script>
+{% endblock %}

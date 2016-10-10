@@ -1,0 +1,95 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Organizations{% endblock %}
+
+{% block body %}
+
+    <div class="panel panel-default">
+        <div class="panel-heading">
+            <h1>Organizations <a class="action" href="{{ path('organization_new') }}">+</a></h1>
+        </div>
+
+        <div class="panel-body">
+            <div class="row">
+                <div class="col-md-6">
+                    <form class="form-inline" action="{{ path('organization_index') }}" method="get">
+                        <div class="form-group">
+                            <label for="offset" class="column">Items per page</label>
+                            <select class="form-control input-sm" id="offset" name="offset">
+                                {% for i in range(10, 50, 10) %}
+                                    <option {% if offset == i %}selected{% endif %} value="{{ i }}">{{ i }}</option>
+                                {% endfor %}
+                            </select>
+                        </div>
+                        <input class="btn btn-default btn-sm" type="submit" value="Show" />
+                    </form>
+                </div>
+                <div class="col-md-6">
+                    <form action="{{ path('organization_index') }}" method="get">
+                        <label for="search">Search</label><input type="text" id="search" name="search"><input class="btn btn-default btn-sm" type="submit" value="Search" />
+                    </form>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-sm-12">
+                    <table class="table table-bordered table-hover">
+                        <thead>
+                        <tr>
+                            <th class="orgnumber">Org. number</th>
+                            <th>Name</th>
+                            <th class="numpermits"><a href="{{ path('organization_index', {'page': page - 1, 'offset': offset}) }}">Permits</a></th>
+                            <th class="numemployees"><a href="{{ path('organization_index', {'page': page - 1, 'offset': offset, 'order': 'employees'}) }}">Employees</a></th>
+                            <th class="numcontacts"><a href="{{ path('organization_index', {'page': page - 1, 'offset': offset, 'order': 'contacts'}) }}">Contacts</a></th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        {% for result in organizations %}
+                            <tr>
+                                <td class="orgnumber">{{ result.Organization.number }}</td>
+                                <td><a href="{{ path('organization_show', {'id': result.Organization.id }) }}">{{ result.Organization.name }}</a></td>
+                                <td class="numpermits">{{ result.numPermits }}</td>
+                                <td class="numemployees">{{ result.Organization.numEmployees }}</td>
+                                <td class="numcontacts">{{ result.Organization.contacts | length }}</td>
+                            </tr>
+                        {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+
+        <div class="panel-body text-right">
+            {% set order = app.request.get('order') %}
+            {% set pages = (total/offset)|round - 1 %}
+            <span>Page {{ page }} of {{ pages }}</span>
+            <nav aria-label="Page navigation">
+                <ul class="pagination">
+                    <li{% if page == 1 %} class="disabled"{% endif %}>
+                        <a href="{{ path('organization_index', {'page': page - 1, 'offset': offset, 'order': order }) }}" aria-label="Previous">
+                            <span aria-hidden="true">&laquo;</span>
+                        </a>
+                    </li>
+                    <li{% if page == 1 %} class="disabled"{% endif %}>
+                        <a href="{{ path('organization_index', {'page': 1, 'offset': offset, 'order': order }) }}" aria-label="First">
+                            <span aria-hidden="true">1</span>
+                        </a>
+                    </li>
+
+                    <li{% if pages == page %} class="disabled"{% endif %}>
+                        <a href="{{ path('organization_index', {'page': pages, 'offset': offset, 'order': order }) }}" aria-label="Previous">
+                            <span aria-hidden="true">{{ pages }}</span>
+                        </a>
+                    </li>
+                    <li{% if pages == page %} class="disabled"{% endif %}>
+                        <a href="{{ path('organization_index', {'page': page + 1, 'offset': offset, 'order': order }) }}" aria-label="First">
+                            <span aria-hidden="true">&raquo;</span>
+                        </a>
+                    </li>
+                </ul>
+            </nav>
+        </div>
+
+    </div>
+
+{% endblock %}

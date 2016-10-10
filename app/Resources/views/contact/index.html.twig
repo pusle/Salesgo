@@ -1,0 +1,108 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Contacts{% endblock %}
+
+{% block body %}
+
+    <section>
+        <ol class="breadcrumb">
+            <li><a href="{{ path('dashboard') }}">Dashboard</a></li>
+            <li class="active">Contacts</li>
+        </ol>
+    </section>
+
+    <h1>Contacts</h1>
+
+    <div class="panel panel-default">
+        <div class="panel-body">
+            <div class="row">
+                <div class="col-md-6">
+                    <form class="form-inline box" action="{{ path('contact_index') }}" method="get">
+                        <div class="form-group">
+                            <label for="offset" class="column">Items per page</label>
+                            <select class="form-control input-sm" id="offset" name="offset">
+                                {% for i in range(10, 50, 10) %}
+                                    <option {% if offset == i %}selected{% endif %} value="{{ i }}">{{ i }}</option>
+                                {% endfor %}
+                            </select>
+                        </div>
+                        <input class="btn btn-default btn-sm" type="submit" value="Show" />
+                    </form>
+                </div>
+                <div class="col-md-6">
+                    <form action="{{ path('contact_index') }}" method="get">
+                        <label for="search">Search</label><input type="text" id="search" name="search"><input class="btn btn-default btn-sm" type="submit" value="Search" />
+                    </form>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-sm-12">
+                    <table class="table table-bordered table-hover">
+                        <thead>
+                        <tr>
+                            <th class="orgnumber">Org. number</th>
+                            <th>Name</th>
+                            <th>Status</th>
+                            <th class="numpermits"><a href="{{ path('organization_index', {'page': page - 1, 'offset': offset}) }}">Permits</a></th>
+                            <th class="numemployees"><a href="{{ path('organization_index', {'page': page - 1, 'offset': offset, 'order': 'employees'}) }}">Employees</a></th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        {% for result in contacts %}
+                            <tr>
+                                {% set contact = result.Contact %}
+                                <td class="orgnumber">{{ contact.organization.number }}</td>
+                                <td>
+                                    <a href="{{ path('contact_show', {'id': contact.id }) }}">{{ contact.name }}</a>
+                                    <small>({{ contact.organization.name }})</small>
+                                </td>
+                                <td>
+                                    {% if contact.leadStatuses is defined and contact.leadStatuses is not empty %}
+                                        {% set status = contact.leadStatuses|last %}
+                                        {{ status.leadStatusType.title }}
+                                    {% endif %}
+                                </td>
+                                <td class="numpermits">{{ result.numPermits }}</td>
+                                <td class="numemployees">{{ contact.organization.numEmployees }}</td>
+                            </tr>
+                        {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+
+        <div class="panel-body text-right">
+            {% set pages = (total/offset)|round - 1 %}
+            <span>Page {{ page }} of {{ pages }}</span>
+            <nav aria-label="Page navigation">
+                <ul class="pagination">
+                    <li{% if page == 1 %} class="disabled"{% endif %}>
+                        <a href="{{ path('contact_index', {'page': page - 1, 'offset': offset }) }}" aria-label="Previous">
+                            <span aria-hidden="true">&laquo;</span>
+                        </a>
+                    </li>
+                    <li{% if page == 1 %} class="disabled"{% endif %}>
+                        <a href="{{ path('contact_index', {'page': 1, 'offset': offset }) }}" aria-label="First">
+                            <span aria-hidden="true">1</span>
+                        </a>
+                    </li>
+
+                    <li{% if pages == page %} class="disabled"{% endif %}>
+                        <a href="{{ path('contact_index', {'page': pages, 'offset': offset }) }}" aria-label="Previous">
+                            <span aria-hidden="true">{{ pages }}</span>
+                        </a>
+                    </li>
+                    <li{% if pages == page %} class="disabled"{% endif %}>
+                        <a href="{{ path('contact_index', {'page': page + 1, 'offset': offset }) }}" aria-label="First">
+                            <span aria-hidden="true">&raquo;</span>
+                        </a>
+                    </li>
+                </ul>
+            </nav>
+        </div>
+
+    </div>
+
+{% endblock %}

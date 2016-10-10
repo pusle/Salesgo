@@ -1,0 +1,17 @@
+services:
+    kernel.subscriber.contact_created:
+        class: LeadBundle\Event\ContactSubscriber
+        arguments: [ "@doctrine.orm.entity_manager" ]
+        tags:
+            - { name: kernel.event_subscriber }
+
+    lead.twig_extension:
+        class: LeadBundle\Twig\LeadExtension
+        arguments: ['@service_container']
+        tags:
+            - { name: twig.extension }
+
+    lead.dashboard_leads:
+        class: LeadBundle\Service\DashboardLeadService
+        arguments: [ '@doctrine.orm.entity_manager', '@form.factory', '@router' ]
+        scope: request

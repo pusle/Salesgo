@@ -1,0 +1,34 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Failed to import from BRREG!{% endblock %}
+
+{% block body %}
+
+    <section>
+        <ol class="breadcrumb">
+            <li><a href="#">Home</a></li>
+            <li><a href="{{ path('import_index') }}">Import</a></li>
+            <li class="active">Failed!</li>
+        </ol>
+    </section>
+
+    <section>
+        {% for flash_message in app.session.flashBag.get('error') %}
+            <div class="alert alert-danger" role="alert">
+                {{ flash_message }}
+            </div>
+        {% endfor %}
+    </section>
+
+    <section>
+        <div class="panel panel-info">
+            <div class="panel-heading">
+                <h1 class="">Oooops, something terrible happened</h1>
+            </div>
+            <div class="panel-body">
+                <p>Seems like the data import from BRREG failed. </p>
+            </div>
+        </div>
+    </section>
+
+{% endblock %}

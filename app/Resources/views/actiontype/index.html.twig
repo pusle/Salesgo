@@ -1,0 +1,41 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <h1>ActionType list</h1>
+
+    <table>
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Name</th>
+                <th>Description</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for actionType in actionTypes %}
+            <tr>
+                <td><a href="{{ path('actiontype_show', { 'id': actionType.id }) }}">{{ actionType.id }}</a></td>
+                <td>{{ actionType.name }}</td>
+                <td>{{ actionType.description }}</td>
+                <td>
+                    <ul>
+                        <li>
+                            <a href="{{ path('actiontype_show', { 'id': actionType.id }) }}">show</a>
+                        </li>
+                        <li>
+                            <a href="{{ path('actiontype_edit', { 'id': actionType.id }) }}">edit</a>
+                        </li>
+                    </ul>
+                </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <ul>
+        <li>
+            <a href="{{ path('actiontype_new') }}">Create a new entry</a>
+        </li>
+    </ul>
+{% endblock %}

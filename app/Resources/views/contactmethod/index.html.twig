@@ -1,0 +1,36 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <h1>ContactMethod list</h1>
+
+    <table>
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Name</th>
+                <th>Value</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for contactMethod in contactMethods %}
+            <tr>
+                <td><a href="{{ path('contactmethod_show', { 'id': contactMethod.id }) }}">{{ contactMethod.id }}</a></td>
+                <td>{{ contactMethod.name }}</td>
+                <td>{{ contactMethod.value }}</td>
+                <td>
+                    <ul>
+                        <li>
+                            <a href="{{ path('contactmethod_show', { 'id': contactMethod.id }) }}">show</a>
+                        </li>
+                        <li>
+                            <a href="{{ path('contactmethod_edit', { 'id': contactMethod.id }) }}">edit</a>
+                        </li>
+                    </ul>
+                </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+{% endblock %}

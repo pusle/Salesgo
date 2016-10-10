@@ -1,0 +1,90 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Dashboard{% endblock %}
+
+{% block body %}
+
+    <h1>Dashboard</h1>
+
+    <div class="row">
+        <div class="col-md-4">
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <h4 class="panel-title">Today TODO's</h4>
+                </div>
+
+                {% set todos = getlatesttodos(5) %}
+                <div class="list-group">
+                    {% for form in todos %}
+                        {{ form_start(form, {'attr': {'class': 'list-group-item todo' }}) }}
+                            <input type="hidden" name="{{ form.title.vars.full_name }}" value="{{ form.title.vars.value }}">
+                            <div class="checkbox checkbox-info checkbox-circle">
+                                <input type="submit" name="submit" value="Update" class="btn btn-xs btn-success pull-right">
+                                <input type="checkbox" name="{{ form.done.vars.full_name }}" value="1" {% if form.done.vars.checked %}checked="checked"{% endif %} class="styled" id="{{ form.done.vars.id ~ loop.index }}">
+                                <label for="{{ form.done.vars.id ~ loop.index }}">{{ form.title.vars.value }}</label>
+                            </div>
+                        {{ form_widget(form._token) }}
+                        {{ form_end(form, {'render_rest': false }) }}
+                    {% endfor %}
+                </div>
+
+                <div class="panel-footer clearfix">
+                    <a href="{{ path('todo_new') }}" class="pull-right">
+                        <span class="glyphicon glyphicon-plus"></span> Add
+                    </a>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <h4 class="panel-title">Lead progress</h4>
+                </div>
+
+                <ul class="list-group">
+                    {% set leads = getdashboardleads(5) %}
+                    {% for lead_status in leads %}
+                        <li class="list-group-item">
+                            <a href="{{ path('contact_show', {'id': lead_status.contact.id }) }}">{{ lead_status.contact.name }}</a>: {{ lead_status.leadStatusType.title }}: {{ lead_status.changedAt | date('d.m H:i') }}
+                        </li>
+                    {% endfor %}
+                </ul>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <h4 class="panel-title">Open actions</h4>
+                </div>
+                {% set actions = getdashboardactions(5) %}
+                <ul class="list-group">
+                    {% for action in actions %}
+                        <li class="list-group-item">
+                            <a href="{{ path('contact_show', {'id': action.contact.id }) }}">{{ action.contact.name }}</a>: {{ action.actionType.name }}: {{ action.startedAt | date('d.m H:i') }}
+                        </li>
+                    {% endfor %}
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-12">
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <h4 class="panel-title">Contacted last 30 days</h4>
+                </div>
+
+                <div class="panel-body">
+                    test
+                </div>
+
+                <div class="panel-footer">
+                    {{ base_dir }}
+                </div>
+            </div>
+        </div>
+    </div>
+
+{% endblock %}
+

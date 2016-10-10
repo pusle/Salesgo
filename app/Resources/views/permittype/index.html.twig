@@ -1,0 +1,41 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <h1>PermitType list</h1>
+
+    <table>
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Number</th>
+                <th>Type</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for permitType in permitTypes %}
+            <tr>
+                <td><a href="{{ path('permittype_show', { 'id': permitType.id }) }}">{{ permitType.id }}</a></td>
+                <td>{{ permitType.number }}</td>
+                <td>{{ permitType.type }}</td>
+                <td>
+                    <ul>
+                        <li>
+                            <a href="{{ path('permittype_show', { 'id': permitType.id }) }}">show</a>
+                        </li>
+                        <li>
+                            <a href="{{ path('permittype_edit', { 'id': permitType.id }) }}">edit</a>
+                        </li>
+                    </ul>
+                </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <ul>
+        <li>
+            <a href="{{ path('permittype_new') }}">Create a new entry</a>
+        </li>
+    </ul>
+{% endblock %}

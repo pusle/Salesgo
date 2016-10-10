@@ -1,0 +1,55 @@
+<div class="panel panel-default">
+    <div class="panel-heading">
+        <h4 class="panel-title">Notes</h4>
+    </div>
+    <div class="panel-body">
+        {% if contact.notes is empty %}
+            <div class="col-sm-12">No notes taken yet.</div>
+        {% endif %}
+
+        {% for note in contact.notes %}
+            <div class="row note">
+                <div class="col-sm-4 col-lg-2"><h4>{{ note.created | date('d.m.Y H:i') }}</h4></div>
+                <div class="col-sm-8 col-lg-10">
+                    {{ note.note }}
+                    <button type="button" class="btn btn-success" data-toggle="modal" data-target="#editNoteModal{{ loop.index }}">
+                        Edit note
+                    </button>
+                </div>
+            </div>
+
+            {{ include('contact/partials/note_edit_form.html.twig') }}
+
+            <hr>
+        {% endfor %}
+    </div>
+    <div class="panel-footer">
+        <button type="button" class="btn btn-success" data-toggle="modal" data-target="#noteModal">
+            New note
+        </button>
+    </div>
+</div>
+
+<div class="modal fade" id="noteModal" tabindex="-1" role="dialog" aria-labelledby="myNoteModalLabel">
+    {{ form_start(note_form) }}
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title" id="myModalLabel">Add new note</h4>
+            </div>
+            <div class="modal-body">
+                <div class="form-group">
+                    {{ form_label(note_form.note, null, { 'label_attr': { 'class': 'control-label' }}) }}
+                    {{ form_widget(note_form.note, {'attr': {'class': 'form-control'}}) }}
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                <input type="submit" name="submit" class="btn btn-primary" value="Add">
+            </div>
+        </div>
+    </div>
+    {{ form_widget(note_form._token) }}
+    {{ form_end(note_form, {'render_rest': false}) }}
+</div>
