@@ -1,0 +1,80 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Taxigo - Login or sign up{% endblock %}
+
+{% block body %}
+
+    <div class="jumbotron jumbotron-transparent">
+        <div class="container">
+            {% if error %}
+                <div class="row">{{ error.messageKey|trans(error.messageData, 'security') }}</div>
+            {% endif %}
+
+            <div class="row">
+                <div class="col-md-5">
+                    <h2>Ha full kontroll på driften. Alltid. </h2>
+                    <p>
+                        Logg inn hvor som helst i verden, når som helst, på Mac, PC, nettbrett eller telefon og ha
+                        full oversikt over hele taxidriften din. Det er administrasjon gjort enkelt.
+                    </p>
+                </div>
+                <div class="col-md-offset-2 col-md-5">
+                    <h2>Register today</h2>
+                    <p>And discover how many hours of work you can save</p>
+
+                    {{ form_start(registration_form, {'attr': {'class': 'registration'}} ) }}
+                    <div class="form-group">
+                        {{ form_label(registration_form.username, null, {'label_attr': {'class': 'sr-only' }}) }}
+                        <div class="">
+                            {{ form_widget(registration_form.username, {'attr': {'placeholder': 'username', 'class': 'form-control' }}) }}
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        {{ form_label(registration_form.email, null, {'label_attr': {'class': 'sr-only' }}) }}
+                        <div class="">
+                            {{ form_widget(registration_form.email, {'attr': {'placeholder': 'email', 'class': 'form-control' }}) }}
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        {{ form_label(registration_form.plainPassword.first, null, {'label_attr': {'class': 'sr-only' }}) }}
+                        <div class="">
+                            {{ form_widget(registration_form.plainPassword.first, {'attr': {'placeholder': 'password', 'class': 'form-control' }}) }}
+                        </div>
+                    </div>
+                    {#<div class="form-group">
+                        {{ form_label(registration_form.plainPassword.second, null, {'label_attr': {'class': 'sr-only' }}) }}
+                        <div class="">
+                            {{ form_widget(registration_form.plainPassword.second, {'attr': {'placeholder': 'repeat password', 'class': 'form-control' }}) }}
+                        </div>
+                    </div>#}
+                    <div class="form-group">
+                        <div class="">
+                            <button type="submit" class="btn btn-block btn-lg btn-success">Continue</button>
+                        </div>
+                    </div>
+                    {{ form_widget(registration_form._token) }}
+                    {{ form_end(registration_form, {'render_rest': false }) }}
+
+                </div>
+            </div><!-- .row -->
+        </div>
+
+    </div>
+
+    <div class="container">
+        <div class="row">
+            <div class="col-md-7">
+                <h4>Fordeler</h4>
+            </div>
+            <div class="col-md-4">
+                <p>
+                    Bruk et verktøy som er laget for å gjøre jobben din enklere, og som vil hjelpe deg i å øke lønnsomheten.
+                    Taxigo er et sikkert og stabilt hjelpemiddel, og vi er alltid imøtekommende om det er noe du lurer på.
+                </p>
+            </div>
+        </div>
+    </div>
+
+{% endblock %}
+
+{% block javascripts %}{% endblock %}
