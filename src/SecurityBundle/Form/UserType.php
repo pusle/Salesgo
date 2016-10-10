@@ -1,7 +1,7 @@
 <?php
-// src/Taxigo/Bundle/SecurityBundle/Form/UserType.php
+// src/SecurityBundle/Form/UserType.php
 
-namespace Taxigo\Bundle\SecurityBundle\Form;
+namespace SecurityBundle\Form;
 
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
@@ -29,7 +29,7 @@ class UserType extends AbstractType
     public function configureOptions(OptionsResolver $resolver)
     {
         $resolver->setDefaults(array(
-            'data_class' => 'Taxigo\Bundle\SecurityBundle\Entity\User',
+            'data_class' => 'SecurityBundle\Entity\User',
         ));
     }
 }

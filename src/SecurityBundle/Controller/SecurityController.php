@@ -1,6 +1,6 @@
 <?php
 
-namespace \SecurityBundle\Controller;
+namespace SecurityBundle\Controller;
 
 use SecurityBundle\Form\UserType;
 use SecurityBundle\Entity\User;
@@ -30,7 +30,7 @@ class SecurityController extends Controller
             'action' => $this->generateUrl('user_registration')
         ));
 
-        return $this->render('TaxigoBundleSecurityBundle:Login:index.html.twig', array(
+        return $this->render('SecurityBundle:Login:index.html.twig', array(
             'last_username' => $lastUsername,
             'error' => $error,
             'registration_form' => $registrationForm->createView()

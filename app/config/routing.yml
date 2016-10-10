@@ -1,3 +1,8 @@
+security:
+    resource: "@SecurityBundle/Controller/"
+    type:     annotation
+    prefix:   /
+
 app_note:
     resource: "@AppBundle/Controller/NoteController.php"
     type:     annotation
