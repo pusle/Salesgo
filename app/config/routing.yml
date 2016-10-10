@@ -1,0 +1,47 @@
+app_note:
+    resource: "@AppBundle/Controller/NoteController.php"
+    type:     annotation
+
+todo_todo:
+    resource: "@TodoBundle/Controller/TodoController.php"
+    type:     annotation
+
+lead_lead_status:
+    resource: "@LeadBundle/Controller/LeadStatusController.php"
+    type:     annotation
+
+lead_lead_status_type:
+    resource: "@LeadBundle/Controller/LeadStatusTypeController.php"
+    type:     annotation
+
+app_contact_method:
+    resource: "@AppBundle/Controller/ContactMethodController.php"
+    type:     annotation
+
+app_contact:
+    resource: "@AppBundle/Controller/ContactController.php"
+    type:     annotation
+
+action_action_type:
+    resource: "@ActionBundle/Controller/ActionTypeController.php"
+    type:     annotation
+
+action_action:
+    resource: "@ActionBundle/Controller/ActionController.php"
+    type:     annotation
+
+permit_permit:
+    resource: "@PermitBundle/Controller/PermitController.php"
+    type:     annotation
+
+permit_permit_county:
+    resource: "@PermitBundle/Controller/PermitCountyController.php"
+    type:     annotation
+
+permit_permit_type:
+    resource: "@PermitBundle/Controller/PermitTypeController.php"
+    type:     annotation
+
+app:
+    resource: "@AppBundle/Controller/"
+    type:     annotation
