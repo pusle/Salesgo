@@ -1,5 +1,5 @@
 security:
-    resource: "@SecurityBundle/Controller/"
+    resource: "@SecurityBundle/Controller/SecurityController.php"
     type:     annotation
     prefix:   /
 
