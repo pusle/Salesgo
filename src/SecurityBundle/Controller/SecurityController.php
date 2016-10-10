@@ -70,10 +70,10 @@ class SecurityController extends Controller
             $this->get('security.token_storage')->setToken($token);
             $this->get('session')->set('_security_main', serialize($token));
 
-            return $this->redirectToRoute('dashboard_index');
+            return $this->redirectToRoute('dashboard');
         }
 
-        return $this->render('TaxigoBundleSecurityBundle:Registration:register.html.twig',
+        return $this->render('SecurityBundle:Registration:register.html.twig',
             array(
                 'form' => $form->createView(),
                 'errors' => $errors

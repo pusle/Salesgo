@@ -1,5 +1,5 @@
 <?php
-// src/SecurityBundle/Bundle/Provider/SalesgoUserProvider.php
+// src/SecurityBundle/Provider/SalesgoUserProvider.php
 
 namespace SecurityBundle\Provider;
 
