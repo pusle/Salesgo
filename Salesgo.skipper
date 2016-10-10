@@ -119,6 +119,9 @@
     <association from="\AppBundle\Entity\Note" to="\AppBundle\Entity\Contact" owner-alias="notes" inverse-alias="contact" many-owner="true" many-inverse="false" uuid="e87794ff-3beb-4f30-a29d-edc199488822">
       <association-field from="contact_id" to="id"/>
     </association>
+    <orm-attributes>
+      <attribute name="filename-format">entity-name-only</attribute>
+    </orm-attributes>
   </module>
   <module name="\ActionBundle" local-name="ActionBundle" namespace="\ActionBundle\Entity" local-namespace="ActionBundle\Entity" export-format="Doctrine2Php" export-path="src/ActionBundle/Entity" uuid="9c0a7bf2-ab74-4f9e-bcbf-3d98223f9ea5">
     <entity name="\ActionBundle\Entity\Action" local-name="Action" namespace="\ActionBundle\Entity" uuid="34c03fc0-23d4-4394-9c65-182d4ed82f47">
@@ -284,6 +287,44 @@
       <attribute name="filename-format">entity-name-only</attribute>
     </orm-attributes>
   </module>
+  <module name="\SecurityBundle" local-name="SecurityBundle" namespace="\SecurityBundle\Entity" local-namespace="\SecurityBundle\Entity" export-format="Doctrine2Php" export-path="src/SecurityBundle/Entity" uuid="4a16cf06-7b6d-4b78-8035-fb28766094bd">
+    <entity name="\SecurityBundle\Entity\User" local-name="User" namespace="\SecurityBundle\Entity" uuid="9e650c8e-9a68-4bcc-af1b-83536e4b1b05">
+      <field name="id" type="integer" required="true" primary="true" uuid="68226e3c-ce4e-4b9e-a2e5-eb89daf91080">
+        <orm-attributes>
+          <attribute name="generator">
+            <attribute name="strategy">AUTO</attribute>
+          </attribute>
+        </orm-attributes>
+      </field>
+      <field name="email" type="string" size="255" unique="true" uuid="fbc89143-ca61-44c3-bee1-7c8305e611ab"/>
+      <field name="name" type="string" size="255" uuid="82b31ed3-1be6-4e22-902c-4b23f06228bc"/>
+      <field name="username" type="string" size="255" unique="true" uuid="c1b9bc65-049b-4d83-890e-0febdeeacc96"/>
+      <field name="password" type="string" size="255" uuid="13e283f0-bcbc-4281-9893-40d9553a3ea7"/>
+      <field name="birthDate" type="date" uuid="180f65e7-e49d-4ffe-81f0-469ec0522106"/>
+      <field name="roles" type="text" uuid="8a62964d-85ed-4e88-89db-4a87b5adf55b"/>
+      <field name="confirmationToken" type="string" size="255" uuid="f9a0d300-4469-4351-b31c-47b3e9203132"/>
+      <field name="passwordRequestedAt" type="datetime" uuid="395db1f2-1fef-4405-a4d3-42dd1b914a43"/>
+      <field name="active" type="boolean" uuid="44309554-a637-4d6a-ac4c-08cfb67296d4"/>
+      <field name="created" type="datetime" uuid="3d8368f3-7282-45f1-b21d-f5895809c493"/>
+      <field name="updated" type="datetime" uuid="656544d4-8b51-407c-8377-27524e39b2ce"/>
+      <orm-attributes>
+        <attribute name="table">users</attribute>
+        <attribute name="lifecycle-callbacks">
+          <attribute name="lifecycle-callback">
+            <attribute name="method">updateTimeStamps</attribute>
+            <attribute name="type">prePersist</attribute>
+          </attribute>
+          <attribute name="lifecycle-callback">
+            <attribute name="method">updateTimeStamps</attribute>
+            <attribute name="type">preUpdate</attribute>
+          </attribute>
+        </attribute>
+      </orm-attributes>
+    </entity>
+    <orm-attributes>
+      <attribute name="filename-format">entity-name-only</attribute>
+    </orm-attributes>
+  </module>
   <visual-data>
     <association uuid="1197020e-525b-4a3d-8f27-1e37f869dfc8" color="#969696" split="1"/>
     <association uuid="234f6526-4637-48c8-92dd-eb4fbc1cfbf2" color="#969696"/>
@@ -306,6 +347,7 @@
     <entity uuid="54df3338-3dff-4398-8349-f146b2ccb051" bg-color="#FFFFFF" hdr-color="#D2D2D2" position-x="206" position-y="63" size-x="0" size-x2="121" size-y="0" size-y2="59"/>
     <entity uuid="58ebf0e7-d027-475b-99ad-ccea2ca6fc2c" bg-color="#FFFFFF" hdr-color="#D2D2D2" position-x="2" position-y="6" size-x="0" size-x2="122" size-y="0" size-y2="129"/>
     <entity uuid="8aac971f-796a-4072-969c-79275b9eb537" bg-color="#FFFFFF" hdr-color="#D2D2D2" position-x="295" position-y="29" size-x="0" size-x2="90" size-y="0" size-y2="59"/>
+    <entity uuid="9e650c8e-9a68-4bcc-af1b-83536e4b1b05" bg-color="#FFFFFF" hdr-color="#D2D2D2" position-x="38" position-y="29" size-x="0" size-x2="157" size-y="0" size-y2="185"/>
     <entity uuid="a3806303-16ac-4cbb-925d-dff53f338f8c" bg-color="#FFFFFF" hdr-color="#D2D2D2" position-x="23" position-y="58" size-x="0" size-x2="128" size-y="0" size-y2="115"/>
     <entity uuid="b1885f41-f7eb-40f8-ab06-d107bef8c081" bg-color="#FFFFFF" hdr-color="#D2D2D2" position-x="158" position-y="192" size-x="0" size-x2="101" size-y="0" size-y2="73"/>
     <entity uuid="c133afc3-93ba-44b3-9bbf-0758e1b02033" bg-color="#FFFFFF" hdr-color="#D2D2D2" position-x="20" position-y="35" size-x="0" size-x2="106" size-y="0" size-y2="115"/>
@@ -317,9 +359,10 @@
     <many-to-many-association-entity uuid="3c9bc020-ea58-445f-9697-5364c8fb2e33" center-position-x="-2" center-position-y="0"/>
     <module uuid="0c81ad92-6983-4ab7-9bb9-7a2811ecd823" bg-color="#FEFCE8" position-x="17" position-y="419" size-x="0" size-x2="498" size-y="0" size-y2="189"/>
     <module uuid="2013ce57-054b-44dd-b9d0-b27c90ecbc96" bg-color="#EAE4F1" position-x="523" position-y="359" size-x="0" size-x2="537" size-y="0" size-y2="166"/>
+    <module uuid="4a16cf06-7b6d-4b78-8035-fb28766094bd" bg-color="#FDEBEF" position-x="1081" position-y="16" size-x="15" size-x2="300" size-y="3" size-y2="334"/>
     <module uuid="4d093fb4-8f52-4272-933e-b232c2f8a554" bg-color="#FEEFE3" position-x="523" position-y="214" size-x="0" size-x2="536" size-y="0" size-y2="139"/>
     <module uuid="9ba05604-2879-4eb3-ba19-a2423d5d62ba" bg-color="#FDEBEF" position-x="28" position-y="35" size-x="11" size-x2="487" size-y="22" size-y2="377"/>
     <module uuid="9c0a7bf2-ab74-4f9e-bcbf-3d98223f9ea5" bg-color="#FEFCE8" position-x="522" position-y="13" size-x="0" size-x2="536" size-y="0" size-y2="194"/>
-    <project uuid="bbdbe0a9-4b81-417b-88e9-93be17e25e62" size-x="0" size-x2="1434" size-y="0" size-y2="907"/>
+    <project uuid="bbdbe0a9-4b81-417b-88e9-93be17e25e62" size-x="0" size-x2="1525" size-y="0" size-y2="658"/>
   </visual-data>
 </skipper>

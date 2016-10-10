@@ -1,10 +1,12 @@
 <?php
+
 namespace AppBundle\Entity;
+
 use Doctrine\ORM\Mapping AS ORM;
 
 /**
  * @ORM\Entity
- * @ORM\Table(name="notes")
+ * 
  */
 class Note
 {
