@@ -1,5 +1,5 @@
 security:
-    resource: "@SalesgoSecurityBundle/Controller/SalesgoSecurityBundle.php"
+    resource: "@SalesgoSecurityBundle/Controller/SalesgoSecurityController.php"
     type:     annotation
     prefix:   /
 
