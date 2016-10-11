@@ -1,9 +1,9 @@
 <?php
 
-namespace SecurityBundle\Controller;
+namespace SalesgoSecurityBundle\Controller;
 
-use SecurityBundle\Form\UserType;
-use SecurityBundle\Entity\User;
+use SalesgoSecurityBundle\Form\UserType;
+use SalesgoSecurityBundle\Entity\User;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Component\Security\Core\Authentication\Token\UsernamePasswordToken;
@@ -30,7 +30,7 @@ class SecurityController extends Controller
             'action' => $this->generateUrl('user_registration')
         ));
 
-        return $this->render('SecurityBundle:Login:index.html.twig', array(
+        return $this->render('SalesgoSecurityBundle:Login:index.html.twig', array(
             'last_username' => $lastUsername,
             'error' => $error,
             'registration_form' => $registrationForm->createView()
@@ -73,7 +73,7 @@ class SecurityController extends Controller
             return $this->redirectToRoute('dashboard');
         }
 
-        return $this->render('SecurityBundle:Registration:register.html.twig',
+        return $this->render('SalesgoSecurityBundle:Registration:register.html.twig',
             array(
                 'form' => $form->createView(),
                 'errors' => $errors

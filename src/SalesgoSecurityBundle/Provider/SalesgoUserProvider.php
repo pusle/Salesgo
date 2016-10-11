@@ -1,13 +1,13 @@
 <?php
 // src/SecurityBundle/Provider/SalesgoUserProvider.php
 
-namespace SecurityBundle\Provider;
+namespace SalesgoSecurityBundle\Provider;
 
 use Symfony\Component\Security\Core\User\UserProviderInterface;
 use Symfony\Component\Security\Core\User\UserInterface;
 use Symfony\Component\Security\Core\Exception\UsernameNotFoundException;
 use Symfony\Component\Security\Core\Exception\UnsupportedUserException;
-use SecurityBundle\Entity\User;
+use SalesgoSecurityBundle\Entity\User;
 
 class SalesgoUserProvider implements UserProviderInterface
 {

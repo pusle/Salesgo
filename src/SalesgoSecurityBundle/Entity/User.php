@@ -1,6 +1,6 @@
 <?php
 
-namespace SecurityBundle\Entity;
+namespace SalesgoSecurityBundle\Entity;
 
 use Doctrine\Common\Collections\ArrayCollection;
 use Symfony\Component\Security\Core\User\UserInterface;

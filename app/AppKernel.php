@@ -20,7 +20,7 @@ class AppKernel extends Kernel
             new ActionBundle\ActionBundle(),
             new LeadBundle\LeadBundle(),
             new TodoBundle\TodoBundle(),
-            new SecurityBundle\SalesgoSecurityBundle()
+            new SalesgoSecurityBundle\SalesgoSecurityBundle()
         ];
 
         if (in_array($this->getEnvironment(), ['dev', 'test'], true)) {

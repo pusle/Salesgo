@@ -1,7 +1,7 @@
 <?php
-// src/SecurityBundle/Form/UserType.php
+// src/SalesgoSecurityBundle/Form/UserType.php
 
-namespace SecurityBundle\Form;
+namespace SalesgoSecurityBundle\Form;
 
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
@@ -29,7 +29,7 @@ class UserType extends AbstractType
     public function configureOptions(OptionsResolver $resolver)
     {
         $resolver->setDefaults(array(
-            'data_class' => 'SecurityBundle\Entity\User',
+            'data_class' => 'SalesgoSecurityBundle\Entity\User',
         ));
     }
 }

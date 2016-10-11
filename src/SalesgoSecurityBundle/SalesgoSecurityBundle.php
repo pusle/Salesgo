@@ -1,6 +1,6 @@
 <?php
 
-namespace SecurityBundle;
+namespace SalesgoSecurityBundle;
 
 use Symfony\Component\HttpKernel\Bundle\Bundle;
 
