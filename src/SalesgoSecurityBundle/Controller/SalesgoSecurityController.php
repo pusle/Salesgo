@@ -9,7 +9,7 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Component\Security\Core\Authentication\Token\UsernamePasswordToken;
 use Symfony\Component\HttpFoundation\Request;
 
-class SecurityController extends Controller
+class SalesgoSecurityController extends Controller
 {
     /**
      * @Route("/login", name="login")
