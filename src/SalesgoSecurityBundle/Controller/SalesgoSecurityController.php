@@ -8,6 +8,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Component\Security\Core\Authentication\Token\UsernamePasswordToken;
 use Symfony\Component\HttpFoundation\Request;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 
 class SalesgoSecurityController extends Controller
 {
@@ -39,6 +40,7 @@ class SalesgoSecurityController extends Controller
 
     /**
      * @Route("/register", name="user_registration")
+     * @Method({"GET", "POST"})
      */
     public function registerAction(Request $request)
     {
