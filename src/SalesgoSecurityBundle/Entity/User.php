@@ -9,7 +9,7 @@ use Symfony\Component\Validator\Constraints as Assert;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 
 /**
- * @ORM\Entity
+ * @ORM\Entity(repositoryClass="SalesgoSecurityBundle\Repository\UserRepository")
  * @ORM\Table(name="users")
  * @ORM\HasLifecycleCallbacks
  */

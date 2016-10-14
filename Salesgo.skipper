@@ -287,8 +287,8 @@
       <attribute name="filename-format">entity-name-only</attribute>
     </orm-attributes>
   </module>
-  <module name="\SecurityBundle" local-name="SecurityBundle" namespace="\SecurityBundle\Entity" local-namespace="\SecurityBundle\Entity" export-format="Doctrine2Php" export-path="src/SecurityBundle/Entity" uuid="4a16cf06-7b6d-4b78-8035-fb28766094bd">
-    <entity name="\SecurityBundle\Entity\User" local-name="User" namespace="\SecurityBundle\Entity" uuid="9e650c8e-9a68-4bcc-af1b-83536e4b1b05">
+  <module name="\SalesgoSecurityBundle" local-name="SalesgoSecurityBundle" namespace="\SalesgoSecurityBundle\Entity" local-namespace="\SalesgoSecurityBundle\Entity" export-format="Doctrine2Php" export-path="src/SalesgoSecurityBundle/Entity" uuid="4a16cf06-7b6d-4b78-8035-fb28766094bd">
+    <entity name="\SalesgoSecurityBundle\Entity\User" local-name="User" namespace="\SalesgoSecurityBundle\Entity" uuid="9e650c8e-9a68-4bcc-af1b-83536e4b1b05">
       <field name="id" type="integer" required="true" primary="true" uuid="68226e3c-ce4e-4b9e-a2e5-eb89daf91080">
         <orm-attributes>
           <attribute name="generator">
@@ -319,6 +319,7 @@
             <attribute name="type">preUpdate</attribute>
           </attribute>
         </attribute>
+        <attribute name="repository-class">SalesgoSecurityBundle\Repository\UserRepository</attribute>
       </orm-attributes>
     </entity>
     <orm-attributes>

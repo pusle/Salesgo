@@ -3,14 +3,15 @@
 security:
 
     encoders:
-        SecurityBundle\Entity\User:
+        SalesgoSecurityBundle\Entity\User:
             algorithm: bcrypt
 
     # http://symfony.com/doc/current/book/security.html#where-do-users-come-from-user-providers
     providers:
         salesgo_provider:
             entity:
-                class: SecurityBundle\Entity\User
+                class: SalesgoSecurityBundle\Entity\User
+                property: username
 
     firewalls:
         # disables authentication for assets and the profiler, adapt it according to your needs
