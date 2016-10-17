@@ -11,7 +11,6 @@ security:
         salesgo_provider:
             entity:
                 class: SalesgoSecurityBundle\Entity\User
-                property: username
 
     firewalls:
         # disables authentication for assets and the profiler, adapt it according to your needs
