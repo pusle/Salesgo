@@ -11,6 +11,8 @@ use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 /**
  * @ORM\Entity(repositoryClass="SalesgoSecurityBundle\Repository\UserRepository")
  * @ORM\Table(name="users")
+ * @UniqueEntity(fields="email", message="registration.email.taken")
+ * @UniqueEntity(fields="username", message="registration.username.taken")
  * @ORM\HasLifecycleCallbacks
  */
 class User implements UserInterface, \Serializable
@@ -41,6 +43,12 @@ class User implements UserInterface, \Serializable
      * @ORM\Column(type="string", length=255, nullable=true)
      */
     private $password;
+
+    /**
+     * @Assert\NotBlank(message="registration.password.empty")
+     * @Assert\Length(max=4096)
+     */
+    private $plainPassword;
 
     /**
      * @ORM\Column(type="date", nullable=true)
@@ -163,7 +171,7 @@ class User implements UserInterface, \Serializable
      * @return mixed
      */
     public function getPlainPassword() {
-
+        return $this->plainPassword;
     }
 
     /**
@@ -172,7 +180,7 @@ class User implements UserInterface, \Serializable
      * @return User
      */
     public function setPlainPassword($plainPassword) {
-
+        $this->plainPassword = $plainPassword;
     }
 
     public function getSalt() {
