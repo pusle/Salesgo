@@ -23,7 +23,7 @@ class SalesgoUserProvider implements UserProviderInterface
 
         // ...
 
-            return new User($username, $password, $salt, $roles);
+            return new User($username, $password);
         }
 
         throw new UsernameNotFoundException(

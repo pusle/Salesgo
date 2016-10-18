@@ -298,7 +298,6 @@
       </field>
       <field name="email" type="string" size="255" unique="true" uuid="fbc89143-ca61-44c3-bee1-7c8305e611ab"/>
       <field name="name" type="string" size="255" uuid="82b31ed3-1be6-4e22-902c-4b23f06228bc"/>
-      <field name="username" type="string" size="255" unique="true" uuid="c1b9bc65-049b-4d83-890e-0febdeeacc96"/>
       <field name="password" type="string" size="255" uuid="13e283f0-bcbc-4281-9893-40d9553a3ea7"/>
       <field name="birthDate" type="date" uuid="180f65e7-e49d-4ffe-81f0-469ec0522106"/>
       <field name="roles" type="text" uuid="8a62964d-85ed-4e88-89db-4a87b5adf55b"/>

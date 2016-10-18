@@ -18,17 +18,11 @@
                     </p>
                 </div>
                 <div class="col-md-offset-2 col-md-5">
-                    {#
+
                     <h2>Register today</h2>
                     <p>And discover how many hours of work you can save</p>
 
                     {{ form_start(registration_form, {'attr': {'class': 'registration'}} ) }}
-                    <div class="form-group">
-                        {{ form_label(registration_form.username, null, {'label_attr': {'class': 'sr-only' }}) }}
-                        <div class="">
-                            {{ form_widget(registration_form.username, {'attr': {'placeholder': 'username', 'class': 'form-control' }}) }}
-                        </div>
-                    </div>
                     <div class="form-group">
                         {{ form_label(registration_form.email, null, {'label_attr': {'class': 'sr-only' }}) }}
                         <div class="">
@@ -54,7 +48,7 @@
                     </div>
                     {{ form_widget(registration_form._token) }}
                     {{ form_end(registration_form, {'render_rest': false }) }}
-                    #}
+
                 </div>
             </div><!-- .row -->
         </div>

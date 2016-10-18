@@ -12,7 +12,6 @@ use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
  * @ORM\Entity(repositoryClass="SalesgoSecurityBundle\Repository\UserRepository")
  * @ORM\Table(name="users")
  * @UniqueEntity(fields="email", message="registration.email.taken")
- * @UniqueEntity(fields="username", message="registration.username.taken")
  * @ORM\HasLifecycleCallbacks
  */
 class User implements UserInterface, \Serializable
@@ -33,11 +32,6 @@ class User implements UserInterface, \Serializable
      * @ORM\Column(type="string", length=255, nullable=true)
      */
     private $name;
-
-    /**
-     * @ORM\Column(type="string", unique=true, length=255, nullable=true)
-     */
-    private $username;
 
     /**
      * @ORM\Column(type="string", length=255, nullable=true)
@@ -133,21 +127,9 @@ class User implements UserInterface, \Serializable
         return $this;
     }
 
-    /**
-     * @return mixed
-     */
-    public function getUsername() {
-        return $this->username;
-    }
-
-    /**
-     * @param mixed $username
-     *
-     * @return User
-     */
-    public function setUsername($username) {
-        $this->username = $username;
-        return $this;
+    public function getUsername()
+    {
+        return $this->email;
     }
 
     /**
