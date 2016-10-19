@@ -202,4 +202,21 @@ class Contact
         $this->organization = $organization;
         return $this;
     }
+
+    /**
+     * @return mixed
+     */
+    public function getUser() {
+        return $this->user;
+    }
+
+    /**
+     * @param mixed $user
+     *
+     * @return Contact
+     */
+    public function setUser($user) {
+        $this->user = $user;
+        return $this;
+    }
 }
