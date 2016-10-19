@@ -1,3 +1,2 @@
 registration.email.taken: "Email already registered"
-registration.username.taken: "Username is taken"
 registration.password.empty: "Password must be entered"

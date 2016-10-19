@@ -1,6 +1,6 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Register{% endblock %}
+{% block title %}Register | Salesgo{% endblock %}
 
 {% block body %}
 
@@ -8,12 +8,11 @@
         <div class="container">
             <div class="row">
                 <div class="col-md-5">
-                    <h2>Salesgo er stengt foreløpig.</h2>
-                    <p>
-                        Salesgo er foreløpig stengt for registrering, men dette vil endre seg.
-                    </p>
+                    <h2>Stengt for registrering.</h2>
+                    <p>Salesgo er foreløpig stengt for registrering, Prøv tilbake om en stund.</p>
                 </div>
                 <div class="col-md-offset-2 col-md-4">
+{#
                     {% if errors %}
                         <div class="row">
                             {% for error in errors %}
@@ -48,7 +47,7 @@
                     </div>
                     {{ form_widget(form._token) }}
                     {{ form_end(form, {'render_rest': false }) }}
-
+#}
                 </div>
             </div><!-- .row -->
         </div>
@@ -61,8 +60,7 @@
             </div>
             <div class="col-md-4">
                 <p>
-                    Bruk et verktøy som er laget for å gjøre jobben din enklere, og som vil hjelpe deg i å øke lønnsomheten.
-                    Taxigo er et sikkert og stabilt hjelpemiddel, og vi er alltid imøtekommende om det er noe du lurer på.
+                    Et enkelt salgsverktøy.
                 </p>
             </div>
         </div>
