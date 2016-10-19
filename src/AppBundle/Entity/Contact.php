@@ -39,7 +39,7 @@ class Contact
 
     /**
      * @ORM\OneToMany(targetEntity="ActionBundle\Entity\Action", mappedBy="contact")
-     * @ORM\OrderBy({"startedAt"="DESC"})
+     * @ORM\OrderBy({"startedAt":"DESC"})
      * 
      */
     private $actions;
@@ -54,6 +54,12 @@ class Contact
      * @ORM\JoinColumn(name="organization_id", referencedColumnName="id")
      */
     private $organization;
+
+    /**
+     * @ORM\ManyToOne(targetEntity="SalesgoSecurityBundle\Entity\User")
+     * @ORM\JoinColumn(name="user_id", referencedColumnName="id")
+     */
+    private $user;
 
 
 

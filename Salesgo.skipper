@@ -1,5 +1,5 @@
 <?xml version="1.0"?>
-<skipper version="3.2.6.1309" mvc="Symfony2" orm="Doctrine2" name="Salesgo" uuid="bbdbe0a9-4b81-417b-88e9-93be17e25e62">
+<skipper version="3.2.7.1338" mvc="Symfony2" orm="Doctrine2" name="Salesgo" uuid="bbdbe0a9-4b81-417b-88e9-93be17e25e62">
   <module name="\AppBundle" local-name="AppBundle" namespace="\AppBundle\Entity" local-namespace="AppBundle\Entity" export-format="Doctrine2Php" export-path="src/AppBundle/Entity" uuid="9ba05604-2879-4eb3-ba19-a2423d5d62ba">
     <entity name="\AppBundle\Entity\Organization" local-name="Organization" namespace="\AppBundle\Entity" uuid="58ebf0e7-d027-475b-99ad-ccea2ca6fc2c">
       <field name="id" type="integer" required="true" unique="true" primary="true" auto-increment="true" uuid="2af13fde-c364-4513-beb7-76d3b3e1bcb2"/>
@@ -73,6 +73,7 @@
       <field name="id" type="integer" required="true" unique="true" primary="true" auto-increment="true" uuid="86aac160-9091-4cd2-b78d-206da8ce0d21"/>
       <field name="name" type="string" uuid="d89bc1d0-7d57-4f4c-924c-bb45316ad5fd"/>
       <field name="organization_id" type="integer" uuid="909bc68e-4bc9-4b3f-9deb-906543a62245"/>
+      <field name="user_id" type="integer" uuid="2c6d6e1a-685f-46db-af48-2aa18dea0557"/>
       <orm-attributes>
         <attribute name="table">contacts</attribute>
         <attribute name="export-file-name">Contact.php</attribute>
@@ -85,6 +86,16 @@
         <attribute name="side-inverse">
           <attribute name="cascade">
             <attribute name="cascade-all">true</attribute>
+          </attribute>
+        </attribute>
+      </orm-attributes>
+    </association>
+    <association from="\AppBundle\Entity\Contact" to="\SalesgoSecurityBundle\Entity\User" inverse-alias="user" many-owner="true" many-inverse="false" uuid="fb92ab50-0266-4f4f-bd72-c2f015414b7e">
+      <association-field from="user_id" to="id"/>
+      <orm-attributes>
+        <attribute name="side-inverse">
+          <attribute name="cascade">
+            <attribute name="cascade-remove">true</attribute>
           </attribute>
         </attribute>
       </orm-attributes>
@@ -336,7 +347,8 @@
     <association uuid="8ebc98ab-0a23-4404-a643-a92c932dcb61" center-position-x="0" center-position-y="0" color="#969696"/>
     <association uuid="90bfc75c-89cd-422a-8bb6-386a6ba732ee" color="#969696"/>
     <association uuid="d7a0ecb4-6489-4704-b9f1-c78111f5ebbe" center-position-x="3" center-position-y="0" color="#969696" split="1"/>
-    <association uuid="e87794ff-3beb-4f30-a29d-edc199488822" center-position-x="0" center-position-y="12" color="#969696"/>
+    <association uuid="e87794ff-3beb-4f30-a29d-edc199488822" center-position-x="0" center-position-y="8" color="#969696"/>
+    <association uuid="fb92ab50-0266-4f4f-bd72-c2f015414b7e" color="#969696" split="1"/>
     <comment uuid="4a0070e8-3ab7-4185-985c-a66f58f4cb1c" bg-color="#FFFFE0" position-x="195" position-y="59" size-x="0" size-x2="168" size-y="0" size-y2="40" txt-color="#000000"/>
     <entity uuid="08ba3a94-a268-45d9-b99b-87a9e640669b" bg-color="#FFFFFF" hdr-color="#D2D2D2" position-x="237" position-y="38" size-x="0" size-x2="90" size-y="0" size-y2="59"/>
     <entity uuid="0fd0f09c-3f31-4c64-8c0e-70c0646f979a" bg-color="#FFFFFF" hdr-color="#D2D2D2" position-x="234" position-y="43" size-x="0" size-x2="90" size-y="0" size-y2="59"/>
