@@ -240,11 +240,11 @@ class User implements UserInterface, \Serializable
     }
 
     public function serialize() {
-        return serialize(array($this->id, $this->username, $this->password));
+        return serialize(array($this->id, $this->email, $this->password));
     }
 
     public function unserialize($serialized) {
-        list ($this->id, $this->username, $this->password) = unserialize($serialized);
+        list ($this->id, $this->email, $this->password) = unserialize($serialized);
     }
 
     /**
@@ -294,7 +294,7 @@ class User implements UserInterface, \Serializable
             return false;
         }
 
-        if ($this->username !== $user->getUsername()) {
+        if ($this->email !== $user->getUsername()) {
             return false;
         }
 
