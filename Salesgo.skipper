@@ -241,7 +241,18 @@
         <attribute name="table">todo_tags</attribute>
       </orm-attributes>
     </entity>
-    <comment caption="Many to many" description="Implement many to many relationship between todo and todo tags" uuid="4a0070e8-3ab7-4185-985c-a66f58f4cb1c"/>
+    <entity name="\TodoBundle\Entity\TodoHasTodoTag" local-name="TodoHasTodoTag" namespace="\TodoBundle\Entity" uuid="33bd5eae-3459-4067-b88e-c407eda34d10">
+      <field name="todo_id" type="integer" required="true" primary="true" uuid="5547210e-0700-47d0-b40f-b6d54dd1f9d1"/>
+      <field name="todo_tag_id" type="integer" required="true" primary="true" uuid="79693e38-1651-4f61-ac39-836f6f603f93"/>
+    </entity>
+    <many-to-many mn-entity="\TodoBundle\Entity\TodoHasTodoTag" uuid="3110f93d-1a7b-4ecd-b7ac-eb360bfeb8e5">
+      <many-to-many-entity name="\TodoBundle\Entity\TodoTag" owning-side="true" alias="todoTags" uuid="5ab6728d-164e-49d6-9448-75ae3b0bcf17">
+        <many-to-many-field from="todo_tag_id" to="id"/>
+      </many-to-many-entity>
+      <many-to-many-entity name="\TodoBundle\Entity\Todo" owning-side="false" alias="todos" uuid="b0649e9d-d8cb-46c2-be9b-f218bf35de7d">
+        <many-to-many-field from="todo_id" to="id"/>
+      </many-to-many-entity>
+    </many-to-many>
     <orm-attributes>
       <attribute name="filename-format">entity-name-only</attribute>
     </orm-attributes>
@@ -349,11 +360,11 @@
     <association uuid="d7a0ecb4-6489-4704-b9f1-c78111f5ebbe" center-position-x="3" center-position-y="0" color="#969696" split="1"/>
     <association uuid="e87794ff-3beb-4f30-a29d-edc199488822" center-position-x="0" center-position-y="8" color="#969696"/>
     <association uuid="fb92ab50-0266-4f4f-bd72-c2f015414b7e" color="#969696" split="1"/>
-    <comment uuid="4a0070e8-3ab7-4185-985c-a66f58f4cb1c" bg-color="#FFFFE0" position-x="195" position-y="59" size-x="0" size-x2="168" size-y="0" size-y2="40" txt-color="#000000"/>
     <entity uuid="08ba3a94-a268-45d9-b99b-87a9e640669b" bg-color="#FFFFFF" hdr-color="#D2D2D2" position-x="237" position-y="38" size-x="0" size-x2="90" size-y="0" size-y2="59"/>
     <entity uuid="0fd0f09c-3f31-4c64-8c0e-70c0646f979a" bg-color="#FFFFFF" hdr-color="#D2D2D2" position-x="234" position-y="43" size-x="0" size-x2="90" size-y="0" size-y2="59"/>
     <entity uuid="23948728-3301-4122-bfbd-69f160057a61" bg-color="#FFFFFF" hdr-color="#D2D2D2" position-x="389" position-y="37" size-x="0" size-x2="77" size-y="0" size-y2="45"/>
     <entity uuid="331ff9f9-64af-4823-9b89-705fb00056a3" bg-color="#FFFFFF" hdr-color="#D2D2D2" position-x="287" position-y="192" size-x="0" size-x2="101" size-y="0" size-y2="87"/>
+    <entity uuid="33bd5eae-3459-4067-b88e-c407eda34d10" bg-color="#FFFFFF" hdr-color="#D2D2D2" position-x="199" position-y="36" size-x="0" size-x2="107" size-y="0" size-y2="60"/>
     <entity uuid="34c03fc0-23d4-4394-9c65-182d4ed82f47" bg-color="#FFFFFF" hdr-color="#D2D2D2" position-x="28" position-y="38" size-x="0" size-x2="121" size-y="0" size-y2="45"/>
     <entity uuid="3af90e68-f966-430b-945c-6d83391cf029" bg-color="#FFFFFF" hdr-color="#D2D2D2" position-x="378" position-y="103" size-x="0" size-x2="90" size-y="0" size-y2="59"/>
     <entity uuid="54df3338-3dff-4398-8349-f146b2ccb051" bg-color="#FFFFFF" hdr-color="#D2D2D2" position-x="206" position-y="63" size-x="0" size-x2="121" size-y="0" size-y2="59"/>
@@ -367,14 +378,15 @@
     <entity uuid="d9029653-aa27-4480-b35e-246d90abca68" bg-color="#FFFFFF" hdr-color="#D2D2D2" position-x="4" position-y="225" size-x="0" size-x2="121" size-y="0" size-y2="129"/>
     <entity uuid="db162d01-ea80-4a34-94b5-2a9d8784dd24" bg-color="#FFFFFF" hdr-color="#D2D2D2" position-x="168" position-y="-11" size-x="0" size-x2="154" size-y="0" size-y2="60"/>
     <entity uuid="fdc47a60-acc1-43e8-8f79-884cd70e3e81" bg-color="#FFFFFF" hdr-color="#D2D2D2" position-x="366" position-y="-10" size-x="0" size-x2="98" size-y="0" size-y2="59"/>
+    <many-to-many-association uuid="3110f93d-1a7b-4ecd-b7ac-eb360bfeb8e5" color="#969696"/>
     <many-to-many-association uuid="5dfd7b25-dda5-47d6-8604-65ae1314a671" color="#969696"/>
     <many-to-many-association-entity uuid="3c9bc020-ea58-445f-9697-5364c8fb2e33" center-position-x="-2" center-position-y="0"/>
     <module uuid="0c81ad92-6983-4ab7-9bb9-7a2811ecd823" bg-color="#FEFCE8" position-x="17" position-y="419" size-x="0" size-x2="498" size-y="0" size-y2="189"/>
-    <module uuid="2013ce57-054b-44dd-b9d0-b27c90ecbc96" bg-color="#EAE4F1" position-x="523" position-y="359" size-x="0" size-x2="537" size-y="0" size-y2="166"/>
-    <module uuid="4a16cf06-7b6d-4b78-8035-fb28766094bd" bg-color="#FDEBEF" position-x="1081" position-y="16" size-x="15" size-x2="300" size-y="3" size-y2="334"/>
+    <module uuid="2013ce57-054b-44dd-b9d0-b27c90ecbc96" bg-color="#EAE4F1" position-x="523" position-y="359" size-x="0" size-x2="536" size-y="0" size-y2="166"/>
+    <module uuid="4a16cf06-7b6d-4b78-8035-fb28766094bd" bg-color="#FDEBEF" position-x="1080" position-y="16" size-x="15" size-x2="300" size-y="3" size-y2="337"/>
     <module uuid="4d093fb4-8f52-4272-933e-b232c2f8a554" bg-color="#FEEFE3" position-x="523" position-y="214" size-x="0" size-x2="536" size-y="0" size-y2="139"/>
     <module uuid="9ba05604-2879-4eb3-ba19-a2423d5d62ba" bg-color="#FDEBEF" position-x="28" position-y="35" size-x="11" size-x2="487" size-y="22" size-y2="377"/>
     <module uuid="9c0a7bf2-ab74-4f9e-bcbf-3d98223f9ea5" bg-color="#FEFCE8" position-x="522" position-y="13" size-x="0" size-x2="536" size-y="0" size-y2="194"/>
-    <project uuid="bbdbe0a9-4b81-417b-88e9-93be17e25e62" size-x="0" size-x2="1525" size-y="0" size-y2="658"/>
+    <project uuid="bbdbe0a9-4b81-417b-88e9-93be17e25e62" size-x="0" size-x2="1527" size-y="0" size-y2="658"/>
   </visual-data>
 </skipper>

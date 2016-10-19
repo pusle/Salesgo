@@ -1,5 +1,6 @@
 <?php
 namespace TodoBundle\Entity;
+use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping AS ORM;
 
 /**
@@ -46,7 +47,18 @@ class Todo
      */
     private $updated;
 
+    /**
+     * @ORM\ManyToMany(targetEntity="TodoBundle\Entity\TodoTag", mappedBy="todos")
+     */
+    private $todoTags;
 
+
+    /**
+     * Todo constructor.
+     */
+    public function __construct() {
+        $this->todoTags = new ArrayCollection();
+    }
 
     /**
      * @return mixed
@@ -120,6 +132,34 @@ class Todo
      */
     public function setDoneDate($doneDate) {
         $this->doneDate = $doneDate;
+        return $this;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getTodoTags() {
+        return $this->todoTags;
+    }
+
+    /**
+     * @param mixed $todoTag
+     *
+     * @return Todo
+     */
+    public function addTodoTag(TodoTag $todoTag) {
+        $todoTag->addTodo($this);
+        $this->todoTags->add($todoTag);
+        return $this;
+    }
+
+    /**
+     * @param $todoTag
+     *
+     * @return Todo
+     */
+    public function removeTodoTag(TodoTag $todoTag) {
+        $this->todoTags->removeElement($todoTag);
         return $this;
     }
 
