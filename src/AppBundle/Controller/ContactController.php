@@ -5,6 +5,7 @@ namespace AppBundle\Controller;
 use ActionBundle\Entity\Action;
 use AppBundle\Entity\ContactMethod;
 use AppBundle\Entity\Note;
+use AppBundle\Entity\Organization;
 use AppBundle\Event\ContactCreatedEvent;
 use LeadBundle\Entity\LeadStatus;
 use Symfony\Component\HttpFoundation\Request;
@@ -62,29 +63,41 @@ class ContactController extends Controller
      */
     public function newAction(Request $request)
     {
-        $contact = new Contact();
+        $org_id = $request->query->get('org_id');
 
-        $form = $this->createForm('AppBundle\Form\ContactType', $contact);
-        $form->handleRequest($request);
+        if ($org_id == "" || ! is_numeric($org_id)) {
+            $this->addFlash('error', 'Manglet organisasjon på kontakt');
+            return $this->redirectToRoute('organization_index');
+        } else {
+            $contact = new Contact();
 
-        if ($form->isSubmitted() && $form->isValid()) {
             $em = $this->getDoctrine()->getManager();
+            $organization = $em->getRepository('AppBundle:Organization')->find($org_id);
 
-            // Dispatcher
-            $event = new ContactCreatedEvent($contact, $em);
-            $eventDispatcher = $this->get('event_dispatcher');
-            $eventDispatcher->dispatch(ContactCreatedEvent::NAME, $event);
+            if ( ! ($organization instanceof Organization)) {
+                $this->addFlash('error', 'Ingen organisasjon ble funnet');
+                return $this->redirectToRoute('organization_index');
+            }
 
-            $em->persist($contact);
-            $em->flush();
+            $contact->setOrganization($organization);
 
-            return $this->redirectToRoute('contact_show', array('id' => $contact->getId()));
+            $form = $this->createForm('AppBundle\Form\ContactType', $contact);
+            $form->handleRequest($request);
+
+            if ($form->isSubmitted() && $form->isValid()) {
+                $em = $this->getDoctrine()->getManager();
+
+                // Dispatcher
+                $event = new ContactCreatedEvent($contact, $em);
+                $eventDispatcher = $this->get('event_dispatcher');
+                $eventDispatcher->dispatch(ContactCreatedEvent::NAME, $event);
+
+                $em->persist($contact);
+                $em->flush();
+
+                return $this->redirectToRoute('contact_show', array('id' => $contact->getId()));
+            }
         }
-
-        return $this->render('contact/new.html.twig', array(
-            'contact' => $contact,
-            'form' => $form->createView(),
-        ));
     }
 
     /**
